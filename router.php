@@ -1,15 +1,12 @@
 <?php
 
 class Router {
-    protected $routes = []; // stores routes
-
-    public function addRoute(string $method, string $url, closure $target) {
-        $this->routes[$method][$url] = $target;
-    }
+    protected $routes = [];
 
     public function route() {
     }
 
-	public function get() {
+	public function get(string $path, array|callable $function) {
+		var_dump($path, $function);
     }
 }
