@@ -1,8 +1,9 @@
 <?php
 
 include_once 'Controller.php';
-class HomeController extends Controller {
+
+class ProductController extends Controller {
 	public function index() {
-		return 'Home';
+		return 'Product';
 	}
 }
