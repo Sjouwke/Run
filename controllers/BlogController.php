@@ -3,7 +3,7 @@
 include_once 'Controller.php';
 
 class BlogController extends Controller {
-	public function index() {
+	public static function index() {
 		return 'Blog';
 	}
 }

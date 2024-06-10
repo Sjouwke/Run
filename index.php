@@ -1,6 +1,6 @@
 <?php
 
-include 'router.php';
+include 'Router.php';
 include 'controllers/BlogController.php';
 include 'controllers/HomeController.php';
 include 'controllers/ProductController.php';
@@ -13,8 +13,8 @@ $router->get('/', [HomeController::class, 'index']);
 $router->get('blog/', [BlogController::class, 'index']);
 $router->get('producten/', [ProductController::class, 'index']);
 $router->get('producten/bekijk/', function() {
-	echo 'Dit is een product view!';
+	return 'Dit is een product view!';
 });
 
 // The route() method SHOULD print the output of the registered function for the given path
-$router->route('producten/bekijk/');
+$router->route('producten/');

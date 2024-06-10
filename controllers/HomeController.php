@@ -2,7 +2,7 @@
 
 include_once 'Controller.php';
 class HomeController extends Controller {
-	public function index() {
+	public static function index() {
 		return 'Home';
 	}
 }
