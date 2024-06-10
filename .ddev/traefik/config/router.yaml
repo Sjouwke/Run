@@ -1,0 +1,100 @@
+#ddev-generated
+
+http:
+  routers:
+    
+    
+    router-web-80-http:
+      
+      rule: HostRegexp(`router.ddev.site`)
+      
+      middlewares:
+        - autodetect
+      service: "router-web-80-http"
+      tls: false
+      entrypoints:
+        - http-80
+    
+    
+    router-web-8025-http:
+      
+      rule: HostRegexp(`router.ddev.site`)
+      
+      middlewares:
+        - autodetect
+      service: "router-web-8025-http"
+      tls: false
+      entrypoints:
+        - http-8025
+    
+    
+    
+    
+    
+    
+    router-web-80-https:
+      
+      rule: HostRegexp(`router.ddev.site`)
+      
+      middlewares:
+        - autodetect
+      service: "router-web-80-https"
+      
+      tls: true
+      
+      entrypoints:
+        - http-443
+    
+    
+    router-web-8025-https:
+      
+      rule: HostRegexp(`router.ddev.site`)
+      
+      middlewares:
+        - autodetect
+      service: "router-web-8025-https"
+      
+      tls: true
+      
+      entrypoints:
+        - http-8026
+    
+    
+
+  # autodetect won't be needed in Traefik 3 https://github.com/traefik/traefik/pull/9546
+  middlewares:
+    autodetect:
+      contentType:
+        autoDetect: false
+
+  services:
+    
+    router-web-80-http:
+      loadbalancer:
+        servers:
+          - url: http://ddev-router-web:80
+    
+    router-web-8025-http:
+      loadbalancer:
+        servers:
+          - url: http://ddev-router-web:8025
+    
+    router-web-80-https:
+    
+      loadbalancer:
+        servers:
+          - url: http://ddev-router-web:80
+    
+    router-web-8025-https:
+    
+      loadbalancer:
+        servers:
+          - url: http://ddev-router-web:8025
+    
+
+
+tls:
+  certificates:
+    - certFile: /mnt/ddev-global-cache/traefik/certs/router.crt
+      keyFile: /mnt/ddev-global-cache/traefik/certs/router.key
+
