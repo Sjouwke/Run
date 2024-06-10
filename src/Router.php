@@ -13,8 +13,7 @@ class Router
 
     public function route(string $path)
     {
-        if (isset($this->routes[$path]))
-        {
+        if (isset($this->routes[$path])) {
             $callable = $this->routes[$path];
 
             echo call_user_func($callable);
