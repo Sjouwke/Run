@@ -1,14 +1,14 @@
 <?php
 
 require __DIR__ . '/src/Router.php';
-require __DIR__ . '/src/controllers/BlogController.php';
-require __DIR__ . '/src/controllers/HomeController.php';
-require __DIR__ . '/src/controllers/ProductController.php';
+require __DIR__ . '/src/Controllers/BlogController.php';
+require __DIR__ . '/src/Controllers/HomeController.php';
+require __DIR__ . '/src/Controllers/ProductController.php';
 
 use Run\Router;
-use Run\controllers\HomeController;
-use Run\controllers\BlogController;
-use Run\controllers\ProductController;
+use Run\Controllers\HomeController;
+use Run\Controllers\BlogController;
+use Run\Controllers\ProductController;
 
 // The Router class DOES NOT take any arguments to be initialized
 $router = new Router();
