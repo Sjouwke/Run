@@ -1,9 +1,14 @@
 <?php
 
-include 'Router.php';
-include 'controllers/BlogController.php';
-include 'controllers/HomeController.php';
-include 'controllers/ProductController.php';
+require __DIR__ . '/src/Router.php';
+require __DIR__ . '/src/Controllers/BlogController.php';
+require __DIR__ . '/src/Controllers/HomeController.php';
+require __DIR__ . '/src/Controllers/ProductController.php';
+
+use Run\Router;
+use Run\Controllers\HomeController;
+use Run\Controllers\BlogController;
+use Run\Controllers\ProductController;
 
 // The Router class DOES NOT take any arguments to be initialized
 $router = new Router();
@@ -13,7 +18,7 @@ $router->get('/', [HomeController::class, 'index']);
 $router->get('blog/', [BlogController::class, 'index']);
 $router->get('producten/', [ProductController::class, 'index']);
 $router->get('producten/bekijk/', function() {
-	return 'Dit is een product view!';
+    return 'Dit is een product view!';
 });
 
 // The route() method SHOULD print the output of the registered function for the given path
