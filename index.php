@@ -5,10 +5,10 @@ require __DIR__ . '/src/Controllers/BlogController.php';
 require __DIR__ . '/src/Controllers/HomeController.php';
 require __DIR__ . '/src/Controllers/ProductController.php';
 
-use Run\Router;
-use Run\Controllers\HomeController;
-use Run\Controllers\BlogController;
-use Run\Controllers\ProductController;
+use Run\src\Router;
+use Run\src\Controllers\HomeController;
+use Run\src\Controllers\BlogController;
+use Run\src\Controllers\ProductController;
 
 // The Router class DOES NOT take any arguments to be initialized
 $router = new Router();
