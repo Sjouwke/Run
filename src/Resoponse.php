@@ -11,16 +11,19 @@ class Response
     public function setHttpStatus(int $statusCode)
     {
         $this->httpStatus = $statusCode;
+        return $this;
     }
 
-    public function setContents(string $content)
+    public function setContents(string $contents)
     {
-        $this->contents = $content;
+        $this->contents = $contents;
+        return $this;
     }
 
     public function setHeader(string $name, string $value)
     {
         $this->header[$name] = $value;
+        return $this;
     }
 
     public function emit()
