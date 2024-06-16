@@ -7,7 +7,6 @@ require __DIR__ . '/src/Controllers/HomeController.php';
 require __DIR__ . '/src/Controllers/ProductController.php';
 
 use Run\Router;
-use Run\Response;
 use Run\Controllers\HomeController;
 use Run\Controllers\BlogController;
 use Run\Controllers\ProductController;
