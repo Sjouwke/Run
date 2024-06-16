@@ -14,9 +14,14 @@ class Router
     public function route(string $path)
     {
         if (isset($this->routes[$path])) {
-            $callable = $this->routes[$path];
+            $callback = $this->routes[$path];
+            $response = call_user_func($callback);
 
-            echo call_user_func($callable);
+            if ($response instanceof Response) {
+                $response->emit();
+            } else {
+                echo $response;
+            }
         }
     }
 }

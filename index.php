@@ -17,10 +17,7 @@ $router->get('/', [HomeController::class, 'index']);
 $router->get('blog/', [BlogController::class, 'index']);
 $router->get('producten/', [ProductController::class, 'index']);
 $router->get('producten/bekijk/', function() {
-    return (new Response())->setHttpStatus(200)
-        ->setContents('<h1>Dit is een product view response dink!</h1>')
-        ->setHeader('Content-Type', 'text/html')
-        ->emit();
+    return 'Dit is een product view!';
 });
 
 // The route() method SHOULD print the output of the registered function for the given path

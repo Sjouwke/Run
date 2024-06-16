@@ -1,8 +1,8 @@
 <?php
 
-namespace Run\src\Controllers;
+namespace Run\Controllers;
 
-use Run\src\Response;
+use Run\Response;
 
 class HomeController
 {
@@ -13,6 +13,6 @@ class HomeController
         $response->setContents('Home response');
         $response->setHeader('Content-Type', 'text/plain');
 
-        return $response->emit();
+       	return $response;
     }
 }

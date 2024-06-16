@@ -1,8 +1,8 @@
 <?php
 
-namespace Run\src\Controllers;
+namespace Run\Controllers;
 
-use Run\src\Response;
+use Run\Response;
 
 class ProductController
 {
@@ -13,6 +13,6 @@ class ProductController
         $response->setContents('Product response');
         $response->setHeader('Content-Type', 'text/plain');
 
-        return $response->emit();
+        return $response;
     }
 }
