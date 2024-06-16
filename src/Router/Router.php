@@ -1,6 +1,8 @@
 <?php
 
-namespace Run;
+namespace Run\Router;
+
+use Run\Response;
 
 class Router
 {
