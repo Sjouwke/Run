@@ -1,19 +1,18 @@
 <?php
 
 require __DIR__ . '/src/Router.php';
+require __DIR__ . '/src/Response.php';
 require __DIR__ . '/src/Controllers/BlogController.php';
 require __DIR__ . '/src/Controllers/HomeController.php';
 require __DIR__ . '/src/Controllers/ProductController.php';
 
 use Run\Router;
+use Run\Response;
 use Run\Controllers\HomeController;
 use Run\Controllers\BlogController;
 use Run\Controllers\ProductController;
 
-// The Router class DOES NOT take any arguments to be initialized
 $router = new Router();
-
-// The get() method MUST take as a first argument a path and as the second argument a callable (function)
 $router->get('/', [HomeController::class, 'index']);
 $router->get('blog/', [BlogController::class, 'index']);
 $router->get('producten/', [ProductController::class, 'index']);
@@ -22,4 +21,4 @@ $router->get('producten/bekijk/', function() {
 });
 
 // The route() method SHOULD print the output of the registered function for the given path
-$router->route('producten/');
+$router->route('producten/bekijk/');
