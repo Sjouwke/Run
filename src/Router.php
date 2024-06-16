@@ -1,6 +1,6 @@
 <?php
 
-namespace Run\src;
+namespace Run;
 
 class Router
 {

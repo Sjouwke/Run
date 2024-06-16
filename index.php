@@ -6,11 +6,11 @@ require __DIR__ . '/src/Controllers/BlogController.php';
 require __DIR__ . '/src/Controllers/HomeController.php';
 require __DIR__ . '/src/Controllers/ProductController.php';
 
-use Run\src\Router;
-use Run\src\Response;
-use Run\src\Controllers\HomeController;
-use Run\src\Controllers\BlogController;
-use Run\src\Controllers\ProductController;
+use Run\Router;
+use Run\Response;
+use Run\Controllers\HomeController;
+use Run\Controllers\BlogController;
+use Run\Controllers\ProductController;
 
 $router = new Router();
 $router->get('/', [HomeController::class, 'index']);
