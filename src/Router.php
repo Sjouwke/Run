@@ -19,14 +19,14 @@ class Router
 
             if ($response instanceof Response) {
                 $response->emit();
+
+                return;
             }
 
-            if (is_string($response)) {
-                (new Response())->setHttpStatus(200)
-                    ->setContents($response)
-                    ->setHeader('Content-Type', 'text/plain')
-                    ->emit();
-            }
+            (new Response())->setHttpStatus(200)
+                ->setContents($response)
+                ->setHeader('Content-Type', 'text/plain')
+                ->emit();
         }
     }
 }
