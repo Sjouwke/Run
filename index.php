@@ -1,7 +1,8 @@
 <?php
 
-require __DIR__ . '/src/Router/Router.php';
 require __DIR__ . '/src/Response.php';
+require __DIR__ . '/src/Router/Router.php';
+require __DIR__ . '/src/Router/NotFound.php';
 require __DIR__ . '/src/Controllers/BlogController.php';
 require __DIR__ . '/src/Controllers/HomeController.php';
 require __DIR__ . '/src/Controllers/ProductController.php';

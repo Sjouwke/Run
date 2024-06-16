@@ -3,6 +3,7 @@
 namespace Run\Router;
 
 use Run\Response;
+use Run\Router\NotFound;
 
 class Router
 {
@@ -15,9 +16,13 @@ class Router
 
     public function route(string $path)
     {
-        if (isset($this->routes[$path])) {
-            $callback = $this->routes[$path];
-            $response = call_user_func($callback);
+        try {
+            if (isset($this->routes[$path])) {
+                $callback = $this->routes[$path];
+                $response = call_user_func($callback);
+            } else {
+                throw new NotFound();
+            }
 
             if ($response instanceof Response) {
                 $response->emit();
@@ -27,6 +32,11 @@ class Router
 
             (new Response())->setHttpStatus(200)
                 ->setContents($response)
+                ->setHeader('Content-Type', 'text/plain')
+                ->emit();
+        } catch (NotFound $exception) {
+            (new Response())->setHttpStatus($exception->getCode())
+                ->setContents($exception->getMessage())
                 ->setHeader('Content-Type', 'text/plain')
                 ->emit();
         }
