@@ -17,11 +17,11 @@ class Router
     public function route(string $path)
     {
         try {
-            if (isset($this->routes[$path])) {
+            if (!isset($this->routes[$path])) {
+                throw new NotFound();
+            } else {
                 $callback = $this->routes[$path];
                 $response = call_user_func($callback);
-            } else {
-                throw new NotFound();
             }
 
             if ($response instanceof Response) {

@@ -21,4 +21,6 @@ $router->get('producten/bekijk/', function() {
 });
 
 // The route() method SHOULD print the output of the registered function for the given path
-$router->route('ikbestanie');
+// $router->route('producten/bekijk/');
+// $router->route('producten/');
+$router->route('ikebstanie/');
