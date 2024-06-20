@@ -16,28 +16,28 @@ class Router
 
     public function route(string $path)
     {
+        $response =	(new Response())
+            ->setHttpStatus(200)
+            ->setHeader('Content-Type', 'text/plain');
+
         try {
             if (!isset($this->routes[$path])) {
                 throw new NotFound();
             }
 
             $callback = $this->routes[$path];
-            $response = call_user_func($callback);
+            $output = call_user_func($callback);
 
-            if ($response instanceof Response) {
-                $response->emit();
+            if ($output instanceof Response) {
+                $output->emit();
                 return;
             }
 
-            (new Response())->setHttpStatus(200)
-                ->setContents($response)
-                ->setHeader('Content-Type', 'text/plain')
-                ->emit();
+            $response->setContents($output);
         } catch (NotFound $exception) {
-            (new Response())->setHttpStatus($exception->getCode())
-                ->setContents($exception->getMessage())
-                ->setHeader('Content-Type', 'text/plain')
-                ->emit();
+            $response->setHttpStatus(404)->setContents($exception->getMessage());
         }
+
+        $response->emit();
     }
 }

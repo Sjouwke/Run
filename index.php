@@ -18,13 +18,9 @@ $router->get('/', [HomeController::class, 'index']);
 $router->get('blog/', [BlogController::class, 'index']);
 $router->get('producten/', [ProductController::class, 'index']);
 $router->get('producten/bekijk/', function() {
-    $product = null;
+    throw new NotFound();
 
-    if (!$product) {
-        throw new NotFound();
-    }
-
-    return 'Dit is een product view!';
+    return;
 });
 
 // The route() method SHOULD print the output of the registered function for the given path
