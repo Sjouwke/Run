@@ -19,14 +19,13 @@ class Router
         try {
             if (!isset($this->routes[$path])) {
                 throw new NotFound();
-            } else {
-                $callback = $this->routes[$path];
-                $response = call_user_func($callback);
             }
+
+            $callback = $this->routes[$path];
+            $response = call_user_func($callback);
 
             if ($response instanceof Response) {
                 $response->emit();
-
                 return;
             }
 
