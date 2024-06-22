@@ -35,7 +35,7 @@ class Router
 
             $response->setContents($output);
         } catch (NotFound $exception) {
-            $response->setHttpStatus(404)->setContents($exception->getMessage());
+            $response->setHttpStatus(404)->setContents('Route not found!');
         }
 
         $response->emit();
