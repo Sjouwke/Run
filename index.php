@@ -21,13 +21,15 @@ $router->get('', [HomeController::class, 'index']);
 $router->get('blog/', [BlogController::class, 'index']);
 $router->get('producten/', [ProductController::class, 'index']);
 $router->get('producten/bekijk/', function() {
-    throw new NotFound();
-
-    return;
+    return '';
+});
+$router->post('send-mail/', function() {
+	echo 'mail verstuurd';
 });
 
 // Request
 $request = Request::fromGlobals();
+var_dump($request);
 
 // Response
 $router->route($request);
