@@ -8,25 +8,25 @@ class Response
     protected $contents = '';
     protected $header = [];
 
-    public function setHttpStatus(int $statusCode)
+    public function setHttpStatus(int $statusCode): self
     {
         $this->httpStatus = $statusCode;
         return $this;
     }
 
-    public function setContents(string $contents)
+    public function setContents(string $contents): self
     {
         $this->contents = $contents;
         return $this;
     }
 
-    public function setHeader(string $name, string $value)
+    public function setHeader(string $name, string $value): self
     {
         $this->header[$name] = $value;
         return $this;
     }
 
-    public function emit()
+    public function emit(): void
     {
         http_response_code($this->httpStatus);
 

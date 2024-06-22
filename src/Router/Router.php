@@ -2,6 +2,7 @@
 
 namespace Run\Router;
 
+use Run\Request;
 use Run\Response;
 use Run\Router\NotFound;
 
@@ -14,8 +15,10 @@ class Router
         $this->routes[$path] = $callable;
     }
 
-    public function route(string $path)
+    public function route(Request $request)
     {
+        $path = $request->getPath();
+
         $response =	(new Response())
             ->setHttpStatus(200)
             ->setHeader('Content-Type', 'text/plain');
