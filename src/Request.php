@@ -4,54 +4,70 @@ namespace Run;
 
 class Request
 {
-    /**
-     * Visibility:
-     * 1. private (default): enkel visible/bruikbaar binnen deze class
-     * 2. protected: visible & bruikbaar binnen deze class & classes extended van deze class
-     * 3. public: overal beschikbaar
-     */
+    // Private properties to store the path, method & and input of the request
     private string $path;
     private string $method;
     private array $input;
 
+    /**
+     * Sets the path of the request.
+     *
+     * @param string $path
+     */
     public function setPath(string $path): void
     {
         $this->path = $path;
     }
 
+    /**
+     * Sets the method of the request.
+     *
+     * @param string $method
+     */
     public function setMethod(string $method): void
     {
         $this->method = $method;
     }
 
+     /**
+     * Sets the input data of the request.
+     *
+     * @param array $input
+     */
     public function setInput(array $input): void
     {
         $this->input = $input;
     }
 
+    /**
+     * Gets the path of the request.
+     */
     public function getPath(): string
     {
         return $this->path;
     }
 
+    /**
+     * Gets the method of the request.
+     */
     public function getMethod(): string
     {
         return $this->method;
     }
 
+    /**
+     * Gets the input data of the request.
+     */
     public function getInput(): array
     {
         return $this->input;
     }
 
-    // Callen op instantie vs. callen op classe
+    /**
+     * Creates a new Request instance from global server variables.
+     */
     public static function fromGlobals(): static
     {
-        /**
-         * $request is nu een instantie van zichzelf
-         * Vanuit een statische methode in een class een instantie van zichzelf aanmaken: self & static
-         * Static want nen extend moet hier aan kunnen, bij self zal het altijd een instantie van de class waarvan het extend is zijn
-         * */
         $request = new static();
         $request->setPath(self::getPathFromGlobals());
         $request->setMethod('GET');
@@ -59,6 +75,9 @@ class Request
         return $request;
     }
 
+    /**
+     * Retrieves the path from the global server variables.
+     */
     private static function getPathFromGlobals(): string
     {
         $path = $_SERVER['REQUEST_URI'];
