@@ -13,7 +13,6 @@ use Run\Controllers\HomeController;
 use Run\Controllers\BlogController;
 use Run\Controllers\ProductController;
 use Run\Request;
-use Run\Router\NotFound;
 
 // Router
 $router = new Router();
@@ -24,7 +23,7 @@ $router->get('producten/bekijk/', function() {
     return '';
 });
 $router->post('send-mail/', function() {
-	echo 'mail verstuurd';
+    echo 'mail verstuurd';
 });
 
 // Request
