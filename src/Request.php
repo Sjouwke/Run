@@ -61,12 +61,11 @@ class Request
 
     private static function getPathFromGlobals(): string
     {
-         $path = $_SERVER['REQUEST_URI'];
+        $path = $_SERVER['REQUEST_URI'];
 
         if (substr($path, 0, 1) === '/') {
             $path = substr($path, 1);
         }
-
         return $path;
     }
 }

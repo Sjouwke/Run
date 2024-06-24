@@ -8,21 +8,41 @@ use Run\Router\NotFound;
 
 class Router
 {
+    // Array to store the registered paths
     protected $routes = [
         'GET' => [],
         'POST' => [],
     ];
 
+    /**
+     * Registers a GET route with a path and a corresponding callable handler.
+     *
+     * @param string $path
+     * @param array|callable $callable
+     */
     public function get(string $path, array|callable $callable)
     {
         $this->routes['GET'][$path] = $callable;
     }
 
+    /**
+     * Registers a POST route with a path and a corresponding callable handler.
+     *
+     * @param string $path
+     * @param array|callable $callable
+     */
     public function post(string $path, array|callable $callable)
     {
         $this->routes['POST'][$path] = $callable;
     }
 
+    /**
+     * Routes the incoming request to the appropriate handler based on the
+     * request's path and method. If the route doesn't exist in the $routes
+     * array, a NotFound is thrown.
+     *
+     * @param Request $request
+     */
     public function route(Request $request)
     {
         $path = $request->getPath();

@@ -28,7 +28,6 @@ $router->post('send-mail/', function() {
 
 // Request
 $request = Request::fromGlobals();
-var_dump($request);
 
 // Response
 $router->route($request);
