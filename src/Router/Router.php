@@ -8,7 +8,7 @@ use Run\Router\NotFound;
 
 class Router
 {
-    // Array to store the registered paths
+    // Protected array to store the registered paths
     protected $routes = [
         'GET' => [],
         'POST' => [],
