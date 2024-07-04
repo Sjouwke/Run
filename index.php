@@ -24,10 +24,23 @@ $container->singleton('request', function($container) {
 });
 $request = $container->make('request')::fromGlobals();
 
+// Controllers
+$container->bind('HomeController', function($container) {
+    return new HomeController();
+});
+
+$container->bind('BlogController', function($container) {
+    return new BlogController();
+});
+
+$container->bind('ProductController', function($container) {
+    return new ProductController();
+});
+
 // Routes
-$router->get('', [HomeController::class, 'index']);
-$router->get('blog/', [BlogController::class, 'index']);
-$router->get('producten/', [ProductController::class, 'index']);
+$router->get('', [$container->make('HomeController'), 'index']);
+$router->get('blog/', [$container->make('BlogController'), 'index']);
+$router->get('producten/', [$container->make('ProductController'), 'index']);
 $router->get('producten/bekijk/', function() {
     return '';
 });
