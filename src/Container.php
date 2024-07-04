@@ -12,6 +12,9 @@ class Container
     // Protected array to store singleton dependencies
     protected $singletons = [];
 
+    // Protected array to store instantiated singletons
+    protected $instances = [];
+
     /**
      * Bind dependencies under a certain name
      *
@@ -46,24 +49,12 @@ class Container
         }
 
         if (isset($this->singletons[$name])) {
-            return $this->singletons[$name]($this);
+            if (!isset($this->instances[$name])) {
+                $this->instances[$name] = $this->singletons[$name]($this);
+            }
+            return $this->instances[$name];
         }
 
         throw new Exception('Dependency not found');
     }
 }
-
-// if (isset($this->singletons[$name])) {
-//     // If the singleton is defined and instantiated, return it directly
-//     if (!isset($this->singletons[$name]['instance'])) {
-//         // If the singleton instance doesn't exist, create it and store it
-//         $this->singletons[$name]['instance'] = $this->singletons[$name]['resolver']($this);
-//     }
-//     // Return the stored instance
-//     return $this->singletons[$name]['instance'];
-// }
-
-// if (isset($this->bindings[$name])) {
-//     // If there's a binding for the name, invoke it and return the result
-//     return $this->bindings[$name]($this);
-// }
