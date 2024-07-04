@@ -13,6 +13,7 @@ use Run\Controllers\HomeController;
 use Run\Controllers\BlogController;
 use Run\Controllers\ProductController;
 use Run\Request;
+use Run\Response;
 
 // Router
 $router = new Router();
@@ -23,7 +24,9 @@ $router->get('producten/bekijk/', function() {
     return '';
 });
 $router->post('send-mail/', function() {
-    echo 'mail verstuurd';
+   return (new Response())->setHttpStatus(200)
+        ->setContents('Mail verstuurd')
+        ->setHeader('Content-Type', 'text/plain');
 });
 
 // Request
