@@ -11,8 +11,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $content = $this->twig->render('product/index.twig', [
-            'title' => 'Product'
+        $content = $this->twig->render('pages/product/index.twig', [
+            'page' => 'Product'
         ]);
 
         return (new Response())->setHttpStatus(200)

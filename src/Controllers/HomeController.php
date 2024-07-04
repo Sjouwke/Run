@@ -11,8 +11,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $content = $this->twig->render('home/index.twig', [
-            'title' => 'Home'
+        $content = $this->twig->render('pages/home/index.twig', [
+            'page' => 'Home'
         ]);
 
         return (new Response())->setHttpStatus(200)

@@ -1,0 +1,22 @@
+{# ========================================================================== #}
+{# Props #}
+{# ========================================================================== #}
+{% set page = page|default("") %}
+
+{# ========================================================================== #}
+{# Template #}
+{# ========================================================================== #}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, width=device-width">
+		<title>{{ page }}</title>
+	</head>
+
+	<body>
+		{% block content %}
+		{% endblock %}
+	</body>
+</html>

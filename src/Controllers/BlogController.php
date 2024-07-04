@@ -11,8 +11,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $content = $this->twig->render('blog/index.twig', [
-            'title' => 'Blog'
+        $content = $this->twig->render('pages/blog/index.twig', [
+            'page' => 'Blog'
         ]);
 
         return (new Response())->setHttpStatus(200)
