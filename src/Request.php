@@ -70,7 +70,7 @@ class Request
     {
         $request = new static();
         $request->setPath(self::getPathFromGlobals());
-        $request->setMethod('GET');
+        $request->setMethod(self::getMethodFromGlobals());
         $request->setInput([]);
         return $request;
     }
@@ -86,5 +86,15 @@ class Request
             $path = substr($path, 1);
         }
         return $path;
+    }
+
+    /**
+     * Retrieves the method form the global server variables.
+     */
+    private static function getMethodFromGlobals(): string
+    {
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+
+        return $method;
     }
 }
