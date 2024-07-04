@@ -4,15 +4,19 @@ namespace Run\Controllers;
 
 use Run\Response;
 
-class BlogController
+class BlogController extends Controller
 {
     /**
      * Handles the index action for the BlogController.
      */
-    public static function index()
+    public function index()
     {
+        $content = $this->twig->render('blog/index.twig', [
+            'title' => 'Blog'
+        ]);
+
         return (new Response())->setHttpStatus(200)
-            ->setContents('Blog response')
-            ->setHeader('Content-Type', 'text/plain');
+            ->setContents($content)
+            ->setHeader('Content-Type', 'text/html');
     }
 }

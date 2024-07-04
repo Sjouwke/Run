@@ -3,19 +3,9 @@
 namespace Run\Controllers;
 
 use Run\Response;
-use Twig\Environment;
 
-class HomeController
+class HomeController extends Controller
 {
-    // Protected property to store the Twig environment instance
-    protected $twig;
-
-    // Constructor is called when an instance of the controller is created
-    public function __construct(Environment $twig)
-    {
-        $this->twig = $twig;
-    }
-
     /**
      * Handles the index action for the HomeController.
      */
