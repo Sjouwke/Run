@@ -2,8 +2,6 @@
 
 namespace Run\Controllers;
 
-use Run\Response;
-
 class BlogController extends Controller
 {
     /**
