@@ -2,8 +2,6 @@
 
 namespace Run\Controllers;
 
-use Run\Response;
-
 class HomeController extends Controller
 {
     /**
@@ -11,12 +9,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $content = $this->twig->render('pages/home/index.twig', [
-            'page' => 'Home'
+        return $this->render('pages/home/index.twig', [
+            'page' => 'Home',
+            'title' => 'Hallokes, welkom op Home'
         ]);
-
-        return (new Response())->setHttpStatus(200)
-            ->setContents($content)
-            ->setHeader('Content-Type', 'text/html');
     }
 }

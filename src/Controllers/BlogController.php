@@ -11,12 +11,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $content = $this->twig->render('pages/blog/index.twig', [
+        return $this->render('pages/blog/index.twig', [
             'page' => 'Blog'
         ]);
-
-        return (new Response())->setHttpStatus(200)
-            ->setContents($content)
-            ->setHeader('Content-Type', 'text/html');
     }
 }
