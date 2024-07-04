@@ -1,13 +1,6 @@
 <?php
 
-require __DIR__ . '/src/Container.php';
-require __DIR__ . '/src/Response.php';
-require __DIR__ . '/src/Request.php';
-require __DIR__ . '/src/Router/Router.php';
-require __DIR__ . '/src/Router/NotFound.php';
-require __DIR__ . '/src/Controllers/BlogController.php';
-require __DIR__ . '/src/Controllers/HomeController.php';
-require __DIR__ . '/src/Controllers/ProductController.php';
+require 'vendor/autoload.php';
 
 use Run\Router\Router;
 use Run\Controllers\HomeController;
