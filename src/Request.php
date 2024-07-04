@@ -70,8 +70,11 @@ class Request
     {
         $request = new static();
         $request->setPath(self::getPathFromGlobals());
-        $request->setMethod(self::getMethodFromGlobals());
-        $request->setInput([]);
+
+        $method = self::getMethodFromGlobals();
+        $request->setMethod($method);
+        $request->setInput(self::getInputFromGlobals($method));
+
         return $request;
     }
 
@@ -93,8 +96,24 @@ class Request
      */
     private static function getMethodFromGlobals(): string
     {
-        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+        return $_SERVER['REQUEST_METHOD'] ?? 'GET';
+    }
 
-        return $method;
+    /**
+     * Retrieves the input data based on the request method.
+     */
+    private static function getInputFromGlobals(string $method = null): array
+    {
+        $method = $method ?? self::getMethodFromGlobals();
+
+        if ($method === 'POST') {
+            return $_POST;
+        }
+
+        if ($method === 'GET') {
+            return $_GET;
+        }
+
+        return [];
     }
 }
