@@ -20,7 +20,7 @@ class Router
      * @param string $path
      * @param array|callable $callable
      */
-    public function get(string $path, array|callable $callable)
+    public function get(string $path, array|callable $callable): void
     {
         $this->routes['GET'][$path] = $callable;
     }
@@ -31,7 +31,7 @@ class Router
      * @param string $path
      * @param array|callable $callable
      */
-    public function post(string $path, array|callable $callable)
+    public function post(string $path, array|callable $callable): void
     {
         $this->routes['POST'][$path] = $callable;
     }
@@ -43,7 +43,7 @@ class Router
      *
      * @param Request $request
      */
-    public function route(Request $request)
+    public function route(Request $request): void
     {
         $path = $request->getPath();
         $method = $request->getMethod();

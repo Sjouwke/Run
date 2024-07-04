@@ -1,5 +1,6 @@
 <?php
 
+require __DIR__ . '/src/Container.php';
 require __DIR__ . '/src/Response.php';
 require __DIR__ . '/src/Request.php';
 require __DIR__ . '/src/Router/Router.php';
@@ -12,11 +13,25 @@ use Run\Router\Router;
 use Run\Controllers\HomeController;
 use Run\Controllers\BlogController;
 use Run\Controllers\ProductController;
+use Run\Container;
 use Run\Request;
 use Run\Response;
 
-// Router
-$router = new Router();
+// Container
+$container = new Container();
+
+// Dependencies
+$container->bind('router', function ($container) {
+    return new Router();
+});
+$router = $container->make('router');
+
+$container->singleton('request', function($container) {
+    return new Request();
+});
+$request = $container->make('request')::fromGlobals();
+
+// Routes
 $router->get('', [HomeController::class, 'index']);
 $router->get('blog/', [BlogController::class, 'index']);
 $router->get('producten/', [ProductController::class, 'index']);
@@ -28,9 +43,6 @@ $router->post('send-mail/', function() {
         ->setContents('Mail verstuurd')
         ->setHeader('Content-Type', 'text/plain');
 });
-
-// Request
-$request = Request::fromGlobals();
 
 // Response
 $router->route($request);
