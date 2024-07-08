@@ -22,12 +22,8 @@ class Controller
      * @param $template
      * @param $data
      */
-    protected function render(string $template, array $data = []): Response
+    protected function render(string $template, array $data = []): string
     {
-        $content = $this->twig->render($template, $data);
-
-        return (new Response())->setHttpStatus(200)
-            ->setContents($content)
-            ->setHeader('Content-Type', 'text/html');
-	}
+        return $this->twig->render($template, $data);
+    }
 }
