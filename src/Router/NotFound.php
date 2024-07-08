@@ -10,6 +10,4 @@ use Exception;
  */
 class NotFound extends Exception
 {
-    protected $message = 'Route not found';
-    protected $code = 404;
 }

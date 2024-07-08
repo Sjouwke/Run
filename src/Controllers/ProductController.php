@@ -6,6 +6,9 @@ use Run\Response;
 
 class ProductController
 {
+    /**
+     * Handles the index action for the ProductController.
+     */
     public static function index()
     {
         return (new Response())->setHttpStatus(200)
