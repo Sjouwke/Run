@@ -7,11 +7,13 @@
 
 ## Roadmap v1.0.0
 
-- HTTP: router, controllers
-- Config met env variables
-- Simpele template engine
-- CLI
-- Simpele database laag met ORM
+- [x] Add Router class
+- [x] Add Response class
+- [x] Add NotFound class
+- [x] Add Dependency Injection Container
+- [x] Add Autoloading via Composer
+- [] View
+- [] Model
 
 ## Requirements
 
