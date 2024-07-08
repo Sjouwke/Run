@@ -50,7 +50,7 @@ class Router
 
         $response =	(new Response())
             ->setHttpStatus(200)
-            ->setHeader('Content-Type', 'text/plain');
+            ->setHeader('Content-Type', 'text/html');
 
         try {
             if (!isset($this->routes[$method][$path])) {

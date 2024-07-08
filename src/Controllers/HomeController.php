@@ -2,17 +2,16 @@
 
 namespace Run\Controllers;
 
-use Run\Response;
-
-class HomeController
+class HomeController extends Controller
 {
     /**
      * Handles the index action for the HomeController.
      */
-    public static function index()
+    public function index()
     {
-        return (new Response())->setHttpStatus(200)
-            ->setContents('Home response')
-            ->setHeader('Content-Type', 'text/plain');
+        return $this->render('pages/home/index.twig', [
+            'page' => 'Home',
+            'title' => 'Hallokes, welkom op Home'
+        ]);
     }
 }

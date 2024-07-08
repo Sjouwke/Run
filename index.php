@@ -9,6 +9,8 @@ use Run\Controllers\ProductController;
 use Run\Container;
 use Run\Request;
 use Run\Response;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 // Container
 $container = new Container();
@@ -24,18 +26,24 @@ $container->singleton('request', function($container) {
 });
 $request = $container->make('request')::fromGlobals();
 
+$container->singleton('twig', function($container) {
+    $loader = new FilesystemLoader(__DIR__ . '/templates');
+    return new Environment($loader);
+});
+
 // Controllers
 $container->bind('HomeController', function($container) {
-    return new HomeController();
+    return new HomeController($container->make('twig'));
 });
 
 $container->bind('BlogController', function($container) {
-    return new BlogController();
+    return new BlogController($container->make('twig'));
 });
 
 $container->bind('ProductController', function($container) {
-    return new ProductController();
+    return new ProductController($container->make('twig'));
 });
+
 
 // Routes
 $router->get('', [$container->make('HomeController'), 'index']);
@@ -44,6 +52,7 @@ $router->get('producten/', [$container->make('ProductController'), 'index']);
 $router->get('producten/bekijk/', function() {
     return '';
 });
+
 $router->post('send-mail/', function() {
    return (new Response())->setHttpStatus(200)
         ->setContents('Mail verstuurd')
