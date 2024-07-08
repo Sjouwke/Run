@@ -2,17 +2,15 @@
 
 namespace Run\Controllers;
 
-use Run\Response;
-
-class ProductController
+class ProductController extends Controller
 {
     /**
      * Handles the index action for the ProductController.
      */
-    public static function index()
+    public function index()
     {
-        return (new Response())->setHttpStatus(200)
-            ->setContents('Product response')
-            ->setHeader('Content-Type', 'text/plain');
+       return $this->render('pages/product/index.twig', [
+            'page' => 'Product'
+        ]);
     }
 }
