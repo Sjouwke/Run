@@ -124,16 +124,4 @@ class Request
 
         return [];
     }
-
-    /**
-     * Merges queryparameters in the request input
-     */
-    public function setQueryParams(array $params) {
-        foreach($params as $key => $value) {
-            $_GET[$key] = $value;
-        }
-
-        // Merges get params into already existing global variables
-        $this->input = array_merge($_GET, $_POST);
-    }
 }
