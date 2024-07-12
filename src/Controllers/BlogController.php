@@ -11,6 +11,8 @@ class BlogController extends Controller
     {
         $input = $this->request->getInput();
 
-        return $this->render('pages/blog/index.twig', $input);
+        return $this->render('pages/blog/index.twig', array_merge($input, [
+            'page' => 'Blog'
+        ]));
     }
 }

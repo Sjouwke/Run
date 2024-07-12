@@ -83,7 +83,7 @@ class Request
      */
     private static function getPathFromGlobals(): string
     {
-        $path = $_SERVER['REQUEST_URI'];
+        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);  // Strip query parameters
 
         if (substr($path, 0, 1) === '/') {
             $path = substr($path, 1);
@@ -115,5 +115,17 @@ class Request
         }
 
         return [];
+    }
+
+    /**
+     * Merge queryparameters in the request input
+     */
+    public function setQueryParams(array $params) {
+        foreach($params as $key => $value) {
+            $_GET[$key] = $value;
+        }
+
+        // Merge get params into already existing global variables
+        $this->input = array_merge($_GET, $_POST);
     }
 }

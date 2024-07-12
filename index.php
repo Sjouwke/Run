@@ -24,11 +24,11 @@ $router = $container->make('router');
 $container->singleton('request', function($container) {
     return new Request();
 });
-
-$_GET['id'] = 1;
-$_GET['title'] = 'test';
-
 $request = $container->make('request')::fromGlobals();
+$request->setQueryParams([
+    'id' => 1,
+    'category' => 'test'
+]);
 
 $container->singleton('twig', function($container) {
     $loader = new FilesystemLoader(__DIR__ . '/templates');
@@ -50,8 +50,8 @@ $container->bind('ProductController', function($container) use ($request) {
 
 // Routes
 $router->get('', [$container->make('HomeController'), 'index']);
-$router->get('blog/', [$container->make('BlogController'), 'index']);
-$router->get('producten/', [$container->make('ProductController'), 'index']);
+$router->get('blog', [$container->make('BlogController'), 'index']);
+$router->get('producten', [$container->make('ProductController'), 'index']);
 $router->get('producten/bekijk/', function() {
     return '';
 });

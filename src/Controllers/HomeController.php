@@ -11,6 +11,9 @@ class HomeController extends Controller
     {
         $input = $this->request->getInput();
 
-        return $this->render('pages/home/index.twig', $input);
+        return $this->render('pages/home/index.twig', array_merge($input, [
+            'page' => 'Home',
+            'title' => 'Home',
+        ]));
     }
 }
