@@ -24,6 +24,10 @@ $router = $container->make('router');
 $container->singleton('request', function($container) {
     return new Request();
 });
+
+$_GET['id'] = 1;
+$_GET['title'] = 'test';
+
 $request = $container->make('request')::fromGlobals();
 
 $container->singleton('twig', function($container) {
@@ -32,18 +36,17 @@ $container->singleton('twig', function($container) {
 });
 
 // Controllers
-$container->bind('HomeController', function($container) {
-    return new HomeController($container->make('twig'));
+$container->bind('HomeController', function($container) use ($request) {
+    return new HomeController($container->make('twig'), $request);
 });
 
-$container->bind('BlogController', function($container) {
-    return new BlogController($container->make('twig'));
+$container->bind('BlogController', function($container) use ($request) {
+    return new BlogController($container->make('twig'), $request);
 });
 
-$container->bind('ProductController', function($container) {
-    return new ProductController($container->make('twig'));
+$container->bind('ProductController', function($container) use ($request) {
+    return new ProductController($container->make('twig'), $request);
 });
-
 
 // Routes
 $router->get('', [$container->make('HomeController'), 'index']);

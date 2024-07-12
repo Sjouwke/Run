@@ -9,8 +9,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return $this->render('pages/blog/index.twig', [
-            'page' => 'Blog'
-        ]);
+        $input = $this->request->getInput();
+
+        return $this->render('pages/blog/index.twig', $input);
     }
 }

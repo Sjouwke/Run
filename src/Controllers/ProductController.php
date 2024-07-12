@@ -9,8 +9,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-       return $this->render('pages/product/index.twig', [
-            'page' => 'Product'
-        ]);
+        $input = $this->request->getInput();
+
+        return $this->render('pages/product/index.twig', $input);
     }
 }

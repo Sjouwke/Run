@@ -9,9 +9,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return $this->render('pages/home/index.twig', [
-            'page' => 'Home',
-            'title' => 'Hallokes, welkom op Home'
-        ]);
+        $input = $this->request->getInput();
+
+        return $this->render('pages/home/index.twig', $input);
     }
 }
