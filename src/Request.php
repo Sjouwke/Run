@@ -64,6 +64,14 @@ class Request
     }
 
     /**
+     * Gets the query parameters from the URL
+     */
+    public function getQueryParams(): array
+    {
+        return $_GET;
+    }
+
+    /**
      * Creates a new Request instance from global server variables.
      */
     public static function fromGlobals(): static
@@ -118,14 +126,14 @@ class Request
     }
 
     /**
-     * Merge queryparameters in the request input
+     * Merges queryparameters in the request input
      */
     public function setQueryParams(array $params) {
         foreach($params as $key => $value) {
             $_GET[$key] = $value;
         }
 
-        // Merge get params into already existing global variables
+        // Merges get params into already existing global variables
         $this->input = array_merge($_GET, $_POST);
     }
 }

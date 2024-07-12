@@ -25,10 +25,6 @@ $container->singleton('request', function($container) {
     return new Request();
 });
 $request = $container->make('request')::fromGlobals();
-$request->setQueryParams([
-    'id' => 1,
-    'category' => 'test'
-]);
 
 $container->singleton('twig', function($container) {
     $loader = new FilesystemLoader(__DIR__ . '/templates');
