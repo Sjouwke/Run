@@ -64,24 +64,14 @@ class Request
     }
 
     /**
-     * Gets the query parameters from the URL
-     */
-    public function getQueryParams(): array
-    {
-        return $_GET;
-    }
-
-    /**
      * Creates a new Request instance from global server variables.
      */
     public static function fromGlobals(): static
     {
         $request = new static();
         $request->setPath(self::getPathFromGlobals());
-
-        $method = self::getMethodFromGlobals();
-        $request->setMethod($method);
-        $request->setInput(self::getInputFromGlobals($method));
+        $request->setMethod(self::getMethodFromGlobals());
+        $request->setInput(self::getInputFromGlobals());
 
         return $request;
     }
@@ -110,9 +100,9 @@ class Request
     /**
      * Retrieves the input data based on the request method.
      */
-    private static function getInputFromGlobals(string $method = null): array
+    private static function getInputFromGlobals(): array
     {
-        $method = $method ?? self::getMethodFromGlobals();
+        $method = self::getMethodFromGlobals();
 
         if ($method === 'POST') {
             return $_POST;

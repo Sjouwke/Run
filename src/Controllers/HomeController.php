@@ -10,8 +10,7 @@ class HomeController extends Controller
     public function index()
     {
         $input = $this->request->getInput();
-        $queryParams = $this->request->getQueryParams();
-        $category = $queryParams['category'] ?? null;
+        $category = $input['category'] ?? null;
 
         return $this->render('pages/home/index.twig', [
             'page' => 'Home',
