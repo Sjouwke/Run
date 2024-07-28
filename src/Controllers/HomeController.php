@@ -13,10 +13,10 @@ class HomeController extends Controller
         $queryParams = $this->request->getQueryParams();
         $category = $queryParams['category'] ?? null;
 
-        return $this->render('pages/home/index.twig', array_merge($input, [
+        return $this->render('pages/home/index.twig', [
             'page' => 'Home',
             'title' => 'Home',
             'category' => $category
-        ]));
+        ]);
     }
 }

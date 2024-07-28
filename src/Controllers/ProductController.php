@@ -11,8 +11,8 @@ class ProductController extends Controller
     {
         $input = $this->request->getInput();
 
-        return $this->render('pages/product/index.twig', array_merge($input, [
+        return $this->render('pages/product/index.twig', [
             'page' => 'Product',
-        ]));
+        ]);
     }
 }
