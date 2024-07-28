@@ -12,7 +12,7 @@ class HomeController
      *
      * @param Request $request
      */
-    public function index(Request $request): string
+    public static function index(Request $request): string
     {
         $input = $request->getInput();
         $category = $input['category'] ?? null;
