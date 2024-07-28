@@ -2,16 +2,23 @@
 
 namespace Run\Controllers;
 
-class ProductController extends Controller
+use Run\Container;
+use Run\Request;
+
+class ProductController
 {
     /**
      * Handles the index action for the ProductController.
+     *
+     * @param Request $request
      */
-    public function index()
+    public function index(Request $request): string
     {
-        $input = $this->request->getInput();
+        $input = $request->getInput();
 
-        return $this->render('pages/product/index.twig', [
+        $twig = Container::make('view');
+
+        return $twig->render('pages/product/index.twig', [
             'page' => 'Product',
         ]);
     }

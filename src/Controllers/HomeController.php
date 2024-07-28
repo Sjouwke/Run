@@ -2,17 +2,24 @@
 
 namespace Run\Controllers;
 
-class HomeController extends Controller
+use Run\Container;
+use Run\Request;
+
+class HomeController
 {
     /**
      * Handles the index action for the HomeController.
+     *
+     * @param Request $request
      */
-    public function index()
+    public function index(Request $request): string
     {
-        $input = $this->request->getInput();
+        $input = $request->getInput();
         $category = $input['category'] ?? null;
 
-        return $this->render('pages/home/index.twig', [
+        $twig = Container::make('view');
+
+        return $twig->render('pages/home/index.twig', [
             'page' => 'Home',
             'title' => 'Home',
             'category' => $category

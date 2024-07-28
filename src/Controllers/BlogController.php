@@ -2,16 +2,23 @@
 
 namespace Run\Controllers;
 
-class BlogController extends Controller
+use Run\Container;
+use Run\Request;
+
+class BlogController
 {
     /**
      * Handles the index action for the BlogController.
+     *
+     * @param Request $request
      */
-    public function index()
+    public function index(Request $request): string
     {
-        $input = $this->request->getInput();
+        $input = $request->getInput();
 
-        return $this->render('pages/blog/index.twig', [
+        $twig = Container::make('view');
+
+        return $twig->render('pages/blog/index.twig', [
             'page' => 'Blog'
         ]);
     }

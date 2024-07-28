@@ -58,7 +58,7 @@ class Router
             }
 
             $callback = $this->routes[$method][$path];
-            $output = call_user_func($callback);
+            $output = call_user_func($callback, $request);
 
             if ($output instanceof Response) {
                 $output->emit();

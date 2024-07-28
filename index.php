@@ -16,38 +16,38 @@ use Twig\Loader\FilesystemLoader;
 $container = new Container();
 
 // Dependencies
-$container->bind('router', function ($container) {
-    return new Router();
-});
-$router = $container->make('router');
-
-$container->singleton('request', function($container) {
-    return Request::fromGlobals();
-});
-$request = $container->make('request');
-
-$container->singleton('twig', function($container) {
+$container::singleton('view', function($container) {
     $loader = new FilesystemLoader(__DIR__ . '/templates');
     return new Environment($loader);
 });
 
+$container::singleton('request', function($container) {
+    return Request::fromGlobals();
+});
+$request = $container::make('request');
+
+$container::singleton('router', function ($container) {
+    return new Router();
+});
+$router = $container::make('router');
+
 // Controllers
-$container->bind('HomeController', function($container) use ($request) {
-    return new HomeController($container->make('twig'), $request);
+$container::bind('HomeController', function($container) {
+    return new HomeController();
 });
 
-$container->bind('BlogController', function($container) use ($request) {
-    return new BlogController($container->make('twig'), $request);
+$container::bind('BlogController', function($container) {
+    return new BlogController();
 });
 
-$container->bind('ProductController', function($container) use ($request) {
-    return new ProductController($container->make('twig'), $request);
+$container::bind('ProductController', function($container) {
+    return new ProductController();
 });
 
 // Routes
-$router->get('', [$container->make('HomeController'), 'index']);
-$router->get('blog', [$container->make('BlogController'), 'index']);
-$router->get('producten', [$container->make('ProductController'), 'index']);
+$router->get('', [$container::make('HomeController'), 'index']);
+$router->get('blog', [$container::make('BlogController'), 'index']);
+$router->get('producten', [$container::make('ProductController'), 'index']);
 $router->get('producten/bekijk/', function() {
     return '';
 });

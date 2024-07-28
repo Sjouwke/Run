@@ -6,14 +6,14 @@ use Exception;
 
 class Container
 {
-    // Protected array to store bindings - registered functions that create instances
-    protected $bindings = [];
+    // Static array to store bindings - registered functions that create instances
+    protected static $bindings = [];
 
-    // Protected array to store singleton dependencies
-    protected $singletons = [];
+    // Static array to store singleton dependencies
+    protected static $singletons = [];
 
-    // Protected array to store instantiated singletons
-    protected $instances = [];
+    // Static array to store instantiated singletons
+    protected static $instances = [];
 
     /**
      * Bind dependencies under a certain name
@@ -21,9 +21,9 @@ class Container
      * @param string $name
      * @param callable $resolver
      */
-    public function bind(string $name, callable $resolver): void
+    public static function bind(string $name, callable $resolver): void
     {
-        $this->bindings[$name] = $resolver;
+        self::$bindings[$name] = $resolver(new self());
     }
 
     /**
@@ -32,9 +32,9 @@ class Container
      * $param string $name
      * $param callable $resolver
      */
-    public function singleton(string $name, callable $resolver): void
+    public static function singleton(string $name, callable $resolver): void
     {
-        $this->singletons[$name] = $resolver;
+        self::$singletons[$name] = $resolver;
     }
 
     /**
@@ -42,17 +42,17 @@ class Container
      *
      * @param string $name
      */
-    public function make(string $name): mixed
+    public static function make(string $name): mixed
     {
-        if (isset($this->bindings[$name])) {
-            return $this->bindings[$name]($this);
+        if (isset(self::$bindings[$name])) {
+            return self::$bindings[$name];
         }
 
-        if (isset($this->singletons[$name])) {
-            if (!isset($this->instances[$name])) {
-                $this->instances[$name] = $this->singletons[$name]($this);
+        if (isset(self::$singletons[$name])) {
+            if (!isset(self::$instances[$name])) {
+                self::$instances[$name] = self::$singletons[$name];
             }
-            return $this->instances[$name];
+            return self::$instances[$name](new self());
         }
 
         throw new Exception('Dependency not found');
