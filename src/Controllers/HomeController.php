@@ -16,7 +16,6 @@ class HomeController
     {
         $input = $request->getInput();
         $category = $input['category'] ?? null;
-
         $twig = Container::make('view');
 
         return $twig->render('pages/home/index.twig', [

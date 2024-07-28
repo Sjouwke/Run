@@ -15,7 +15,6 @@ class BlogController
     public static function index(Request $request): string
     {
         $input = $request->getInput();
-
         $twig = Container::make('view');
 
         return $twig->render('pages/blog/index.twig', [
