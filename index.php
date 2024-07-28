@@ -22,9 +22,9 @@ $container->bind('router', function ($container) {
 $router = $container->make('router');
 
 $container->singleton('request', function($container) {
-    return new Request();
+    return Request::fromGlobals();
 });
-$request = $container->make('request')::fromGlobals();
+$request = $container->make('request');
 
 $container->singleton('twig', function($container) {
     $loader = new FilesystemLoader(__DIR__ . '/templates');
