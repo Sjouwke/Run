@@ -12,42 +12,39 @@ use Run\Response;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-// Container
-$container = new Container();
-
 // Dependencies
-$container::singleton('view', function($container) {
+Container::singleton('view', function() {
     $loader = new FilesystemLoader(__DIR__ . '/templates');
     return new Environment($loader);
 });
 
-$container::singleton('request', function($container) {
+Container::singleton('request', function() {
     return Request::fromGlobals();
 });
-$request = $container::make('request');
+$request = Container::make('request');
 
-$container::singleton('router', function ($container) {
+Container::singleton('router', function () {
     return new Router();
 });
-$router = $container::make('router');
+$router = Container::make('router');
 
 // Controllers
-$container::bind('HomeController', function($container) {
+Container::bind('HomeController', function() {
     return new HomeController();
 });
 
-$container::bind('BlogController', function($container) {
+Container::bind('BlogController', function() {
     return new BlogController();
 });
 
-$container::bind('ProductController', function($container) {
+Container::bind('ProductController', function() {
     return new ProductController();
 });
 
 // Routes
-$router->get('', [$container::make('HomeController'), 'index']);
-$router->get('blog', [$container::make('BlogController'), 'index']);
-$router->get('producten', [$container::make('ProductController'), 'index']);
+$router->get('', [Container::make('HomeController'), 'index']);
+$router->get('blog', [Container::make('BlogController'), 'index']);
+$router->get('producten', [Container::make('ProductController'), 'index']);
 $router->get('producten/bekijk/', function() {
     return '';
 });

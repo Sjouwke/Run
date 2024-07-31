@@ -23,7 +23,7 @@ class Container
      */
     public static function bind(string $name, callable $resolver): void
     {
-        self::$bindings[$name] = $resolver(new self());
+        self::$bindings[$name] = $resolver();
     }
 
     /**
@@ -52,7 +52,7 @@ class Container
             if (!isset(self::$instances[$name])) {
                 self::$instances[$name] = self::$singletons[$name];
             }
-            return self::$instances[$name](new self());
+            return self::$instances[$name]();
         }
 
         throw new Exception('Dependency not found');
