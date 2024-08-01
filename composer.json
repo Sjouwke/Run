@@ -1,4 +1,5 @@
 {
+  "name": "sjouwke/run",
   "autoload": {
     "psr-4": {
       "Run\\": "src"
