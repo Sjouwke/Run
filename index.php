@@ -42,9 +42,9 @@ Container::bind('ProductController', function() {
 });
 
 // Routes
-$router->get('', [Container::make('HomeController'), 'index']);
-$router->get('blog', [Container::make('BlogController'), 'index']);
-$router->get('producten', [Container::make('ProductController'), 'index']);
+$router->get('', [HomeController::class, 'index']);
+$router->get('blog', [BlogController::class, 'index']);
+$router->get('producten', [ProductController::class, 'index']);
 $router->get('producten/bekijk/', function() {
     return '';
 });
