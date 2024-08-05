@@ -70,10 +70,8 @@ class Request
     {
         $request = new static();
         $request->setPath(self::getPathFromGlobals());
-
-        $method = self::getMethodFromGlobals();
-        $request->setMethod($method);
-        $request->setInput(self::getInputFromGlobals($method));
+        $request->setMethod(self::getMethodFromGlobals());
+        $request->setInput(self::getInputFromGlobals());
 
         return $request;
     }
@@ -83,7 +81,7 @@ class Request
      */
     private static function getPathFromGlobals(): string
     {
-        $path = $_SERVER['REQUEST_URI'];
+        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);  // Strip query parameters
 
         if (substr($path, 0, 1) === '/') {
             $path = substr($path, 1);
@@ -102,9 +100,9 @@ class Request
     /**
      * Retrieves the input data based on the request method.
      */
-    private static function getInputFromGlobals(string $method = null): array
+    private static function getInputFromGlobals(): array
     {
-        $method = $method ?? self::getMethodFromGlobals();
+        $method = self::getMethodFromGlobals();
 
         if ($method === 'POST') {
             return $_POST;
