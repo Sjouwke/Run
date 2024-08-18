@@ -14,6 +14,9 @@ class Router
         'POST' => [],
     ];
 
+    // Protected array to store the error routes
+    protected $errors = [];
+
     /**
      * Registers a GET route with a path and a corresponding callable handler.
      *
@@ -26,6 +29,17 @@ class Router
     }
 
     /**
+     * Registers an error route with a http status code and a corresponding callable handler.
+     *
+     * @param int $httpStatusCode
+     * @param array|callable $callable
+     */
+    public function registerError(int $httpStatusCode, array|callable $callable): void
+    {
+        $this->errors[$httpStatusCode] = $callable;
+    }
+
+    /**
      * Registers a POST route with a path and a corresponding callable handler.
      *
      * @param string $path
@@ -34,6 +48,22 @@ class Router
     public function post(string $path, array|callable $callable): void
     {
         $this->routes['POST'][$path] = $callable;
+    }
+
+    private function emitResponse(callable $callable, Request $request, int $httpStatusCode = 200): void
+    {
+        $response =	(new Response())
+            ->setHttpStatus($httpStatusCode)
+            ->setHeader('Content-Type', 'text/html');
+
+        $output = call_user_func($callable, $request);
+
+        if ($output instanceof Response) {
+            $output->emit();
+            return;
+        }
+
+        $response->setContents($output)->emit();
     }
 
     /**
@@ -48,28 +78,20 @@ class Router
         $path = $request->getPath();
         $method = $request->getMethod();
 
-        $response =	(new Response())
-            ->setHttpStatus(200)
-            ->setHeader('Content-Type', 'text/html');
-
         try {
             if (!isset($this->routes[$method][$path])) {
                 throw new NotFound();
             }
 
-            $callback = $this->routes[$method][$path];
-            $output = call_user_func($callback, $request);
+            $this->emitResponse($this->routes[$method][$path], $request, 200);
 
-            if ($output instanceof Response) {
-                $output->emit();
-                return;
+        } catch (NotFound $exception) {
+
+            if(!isset($this->errors[404])) {
+                $this->errors[404] = fn($request) => 'Error 404';
             }
 
-            $response->setContents($output);
-        } catch (NotFound $exception) {
-            $response->setHttpStatus(404)->setContents('Route not found!');
+            $this->emitResponse($this->errors[404], $request, 404);
         }
-
-        $response->emit();
     }
 }
